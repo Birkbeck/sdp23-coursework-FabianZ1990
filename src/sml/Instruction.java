@@ -2,6 +2,8 @@ package sml;
 
 // TODO: write a JavaDoc for the class
 
+import java.io.IOException;
+
 /**
  * Represents an abstract instruction.
  *
@@ -16,11 +18,16 @@ public abstract class Instruction {
 	 * (opcode must be an operation of the language)
 	 *
 	 * @param label optional label (can be null)
-	 * @param opcode operation name
+	 * @param opcode operation name - gets checked if it matches one of the seven possible opcodes (case-sensitive)
 	 */
 	public Instruction(String label, String opcode) {
 		this.label = label;
-		this.opcode = opcode;
+
+		if (opcode.matches("add|sub|mul|div|out|mov|jnz")) {
+			this.opcode = opcode;
+		} else
+		{ throw new RuntimeException("Your query contains non supported operations!");
+		}
 	}
 
 	public String getLabel() {
