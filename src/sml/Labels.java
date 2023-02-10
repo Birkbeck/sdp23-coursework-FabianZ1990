@@ -1,8 +1,10 @@
 package sml;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 // TODO: write a JavaDoc for the class
 
@@ -22,7 +24,12 @@ public final class Labels {
 	public void addLabel(String label, int address) {
 		Objects.requireNonNull(label);
 		// TODO: Add a check that there are no label duplicates.
-		labels.put(label, address);
+		if (Arrays.stream(labels.keySet().toArray())
+						.anyMatch(label::equals)) {
+			throw new IllegalArgumentException("Your input contains duplicate labels");
+		} else {
+			labels.put(label, address);
+		}
 	}
 
 	/**
@@ -47,7 +54,15 @@ public final class Labels {
 	@Override
 	public String toString() {
 		// TODO: Implement the method using the Stream API (see also class Registers).
-		return "";
+		if (!labels.isEmpty()) {
+
+			return "List of Labels: " + "\n" + labels.entrySet()
+					.stream()
+					.sorted(Map.Entry.comparingByValue())
+					.map(lbl -> "Label: " + lbl.getKey() + " - Address: " + lbl.getValue())
+					.collect(Collectors.joining("\n"));
+		}
+		return "no labels stored";
 	}
 
 	// TODO: Implement equals and hashCode (needed in class Machine).

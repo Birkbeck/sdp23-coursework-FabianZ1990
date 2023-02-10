@@ -23,7 +23,8 @@ public class OutInstruction extends Instruction {
 
     @Override
     public int execute(Machine m) {
-        System.out.println("The current value stored in Register: " + result.name() + " is " + m.getRegisters().get(result));
+        System.out.println("The current value stored in register " + result.name() + " is " + m.getRegisters().get(result));
+
         return NORMAL_PROGRAM_COUNTER_UPDATE;
     }
 

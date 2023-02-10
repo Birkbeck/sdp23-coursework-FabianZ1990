@@ -26,6 +26,11 @@ public class Main {
 			m.execute();
 			System.out.println("Ending program execution.");
 
+			//TEST
+			//m.getRegisters().toString();
+			//m.getLabels().reset();
+			//System.out.println(m.getLabels().toString());
+
 			System.out.println("Values of registers at program termination:" + m.getRegisters() + ".");
 		}
 		catch (IOException e) {
