@@ -4,14 +4,19 @@ import sml.Instruction;
 import sml.Machine;
 import sml.RegisterName;
 
-public class SubInstruction extends Instruction {
+// TODO: write a JavaDoc for the class
 
+/**
+ * @author
+ */
+
+public class MovInstruction extends Instruction {
     private final RegisterName result;
-    private final RegisterName source;
+    private final int source;
 
-    public static final String OP_CODE = "sub";
+    public static final String OP_CODE = "mov";
 
-    public SubInstruction(String label, RegisterName result, RegisterName source) {
+    public MovInstruction(String label, RegisterName result, int source) {
         super(label, OP_CODE);
         this.result = result;
         this.source = source;
@@ -19,9 +24,7 @@ public class SubInstruction extends Instruction {
 
     @Override
     public int execute(Machine m) {
-        int value1 = m.getRegisters().get(result);
-        int value2 = m.getRegisters().get(source);
-        m.getRegisters().set(result, value1 - value2);
+        m.getRegisters().set(result, source);
         return NORMAL_PROGRAM_COUNTER_UPDATE;
     }
 
@@ -40,4 +43,3 @@ public class SubInstruction extends Instruction {
         return 0;
     }
 }
-

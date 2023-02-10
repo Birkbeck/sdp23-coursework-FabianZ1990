@@ -34,4 +34,14 @@ public class AddInstruction extends Instruction {
 	public String toString() {
 		return getLabelString() + getOpcode() + " " + result + " " + source;
 	}
+
+	@Override
+	protected boolean equals(Instruction ins) {
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return 0;
+	}
 }

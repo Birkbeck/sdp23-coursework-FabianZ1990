@@ -25,9 +25,8 @@ public abstract class Instruction {
 
 		if (opcode.matches("add|sub|mul|div|out|mov|jnz")) {
 			this.opcode = opcode;
-		} else
-		{ throw new RuntimeException("Your query contains non supported operations!");
 		}
+		else { throw new IllegalArgumentException("Not a valid opcode");}
 	}
 
 	public String getLabel() {
@@ -61,4 +60,9 @@ public abstract class Instruction {
 	public abstract String toString();
 
 	// TODO: Make sure that subclasses also implement equals and hashCode (needed in class Machine).
+
+	protected abstract boolean equals(Instruction ins);
+	public abstract int hashCode();
+
+
 }

@@ -1,0 +1,10 @@
+    out EAX
+    mov EAX 6
+    out EAX
+    mov EBX 1
+    mov ECX 1
+    add EAX EBX
+    out EAX
+    mov EBX 9
+    sub EAX EBX
+    out EAX

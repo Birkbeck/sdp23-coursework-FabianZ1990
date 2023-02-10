@@ -67,6 +67,15 @@ public final class Translator {
 
         String opcode = scan();
         switch (opcode) {
+            case MovInstruction.OP_CODE -> {
+                String r = scan();
+                String s = scan();
+                return new MovInstruction(label, Register.valueOf(r), Integer.valueOf(s));
+            }
+            case OutInstruction.OP_CODE -> {
+                String r = scan();
+                return new OutInstruction(label, Register.valueOf(r));
+            }
             case AddInstruction.OP_CODE -> {
                 String r = scan();
                 String s = scan();
