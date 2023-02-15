@@ -24,12 +24,13 @@ public class Main {
 
 			System.out.println("Beginning program execution.");
 			m.execute();
+
 			System.out.println("Ending program execution.");
 
 			//TEST
-			//m.getRegisters().toString();
-			//m.getLabels().reset();
-			//System.out.println(m.getLabels().toString());
+			//System.out.println(m.getProgram());
+			//System.out.println(m.getLabels());
+			//System.out.println(m.getRegisters());
 
 			System.out.println("Values of registers at program termination:" + m.getRegisters() + ".");
 		}
