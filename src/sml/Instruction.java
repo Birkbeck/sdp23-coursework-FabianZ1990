@@ -56,6 +56,12 @@ public abstract class Instruction {
 
 	// TODO: What does abstract in the declaration below mean?
 	//       (Write a short explanation.)
+	//
+	//		 Abstract classes have no body, just a method signature. This class ("Instruction") is declared abstract with 3 abstract methods.
+	//       An abstract class cannot be instantiated, however, as in this program, subclasses can extend it.
+	//		 The Subclasses of "Instruction" are not declared abstract. However, as they are extending an abstract class, they have to implement
+	//		 all abstract methods of the parent class.
+
 	@Override
 	public abstract String toString();
 
