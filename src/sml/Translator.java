@@ -74,6 +74,7 @@ public final class Translator {
             }
             case OutInstruction.OP_CODE -> {
                 String r = scan();
+                String s = scan();
                 return new OutInstruction(label, Register.valueOf(r));
             }
             case JnzInstruction.OP_CODE -> {

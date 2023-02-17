@@ -61,4 +61,19 @@ class AddInstructionTest {
     instruction.execute(machine);
     Assertions.assertEquals(-10, machine.getRegisters().get(EAX));
   }
+  @Test
+  void toStringValidOne() {
+    registers.set(EAX, -5);
+    registers.set(EBX, -5);
+    Instruction instruction = new AddInstruction(null, EAX, EBX);
+    Assertions.assertEquals("add EAX EBX", instruction.toString());
+  }
+  @Test
+  void toStringValidTwoWithLabel() {
+    registers.set(EAX, -5);
+    registers.set(EBX, -5);
+    Instruction instruction = new AddInstruction("f2", EAX, EBX);
+    Assertions.assertEquals("f2: add EAX EBX", instruction.toString());
+  }
 }
+
