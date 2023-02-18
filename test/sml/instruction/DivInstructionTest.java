@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+
 import sml.Instruction;
 import sml.Machine;
 import sml.Registers;
@@ -47,18 +48,18 @@ class DivInstructionTest {
     }
 
     @Test
+
+
     void tryDivisionByZero() {
-        registers.set(EAX, -5);
+        ArithmeticException possibleException = Assertions.assertThrows(ArithmeticException.class, () ->
+        { registers.set(EAX, -5);
         registers.set(EBX, 0);
-        boolean possibleException = false;
         Instruction instruction = new DivInstruction(null, EAX, EBX);
-        try {
-            instruction.execute(machine);
-        } catch (ArithmeticException e) {
-            possibleException = true;
-        }
-        Assertions.assertTrue(possibleException);
+        instruction.execute(machine);});
+    Assertions.assertEquals("Division by zero not possible", possibleException.getMessage());
     }
+
+
     @Test
     void executeValidFour() {
         registers.set(EAX, -5);

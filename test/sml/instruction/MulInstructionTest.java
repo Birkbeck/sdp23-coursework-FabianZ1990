@@ -70,4 +70,19 @@ class MulInstructionTest {
         Assertions.assertEquals(0, machine.getRegisters().get(EAX));
     }
 
+    @Test
+    void toStringValidOne() {
+        registers.set(EAX, -5);
+        registers.set(EBX, -5);
+        Instruction instruction = new MulInstruction(null, EAX, EBX);
+        Assertions.assertEquals("mul EAX EBX", instruction.toString());
+    }
+    @Test
+    void toStringValidTwoWithLabel() {
+        registers.set(EAX, -5);
+        registers.set(EBX, -5);
+        Instruction instruction = new MulInstruction("f2", EAX, EBX);
+        Assertions.assertEquals("f2: mul EAX EBX", instruction.toString());
+    }
+
 }
