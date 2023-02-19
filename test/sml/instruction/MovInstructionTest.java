@@ -30,7 +30,7 @@ class MovInstructionTest {
 
     @Test
     void executeValid() {
-        int numberToAdd = 5;
+        String numberToAdd = "5";
         Instruction instruction = new MovInstruction(null, EAX, numberToAdd);
         instruction.execute(machine);
         Assertions.assertEquals(5, machine.getRegisters().get(EAX));
@@ -38,20 +38,20 @@ class MovInstructionTest {
 
     @Test
     void executeValidTwo() {
-        int numberToAdd = -5;
+        String numberToAdd = "-5";
         Instruction instruction = new MovInstruction(null, ECX, numberToAdd);
         instruction.execute(machine);
         Assertions.assertEquals(-5, machine.getRegisters().get(ECX));
     }
     @Test
     void toStringValidOne() {
-        int numberToAdd = -5;
+        String numberToAdd = "-5";
         Instruction instruction = new MovInstruction(null, EAX, numberToAdd);
         Assertions.assertEquals("mov EAX -5", instruction.toString());
     }
     @Test
     void toStringValidTwoWithLabel() {
-        int numberToAdd = -5;
+        String numberToAdd = "-5";
         Instruction instruction = new MovInstruction("f2", EAX, numberToAdd);
         Assertions.assertEquals("f2: mov EAX -5", instruction.toString());
     }

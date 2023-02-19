@@ -1,6 +1,13 @@
 package sml;
 
+import sml.instruction.AddInstruction;
+
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 
 public class Main {
 	/**
@@ -8,7 +15,7 @@ public class Main {
 	 *
 	 * @param args name of the file containing the program text.
 	 */
-	public static void main(String... args) {
+	public static void main(String... args) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
 		if (args.length != 1) {
 			System.err.println("Incorrect number of arguments - Machine <file> - required");
 			System.exit(-1);
@@ -31,6 +38,7 @@ public class Main {
 			//System.out.println(m.getProgram());
 			//System.out.println(m.getLabels());
 			//System.out.println(m.getRegisters());
+
 
 			System.out.println("Values of registers at program termination:" + m.getRegisters() + ".");
 		}

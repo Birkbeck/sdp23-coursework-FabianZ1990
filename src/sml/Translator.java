@@ -4,11 +4,12 @@ import sml.instruction.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Scanner;
-
-import static sml.Registers.Register;
+import java.util.Map;
 
 /**
  * This class ....
@@ -32,7 +33,7 @@ public final class Translator {
     // prog (the program)
     // return "no errors were detected"
 
-    public void readAndTranslate(Labels labels, List<Instruction> program) throws IOException {
+    public void readAndTranslate(Labels labels, List<Instruction> program) throws IOException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         try (var sc = new Scanner(new File(fileName), StandardCharsets.UTF_8)) {
             labels.reset();
             program.clear();
@@ -61,59 +62,44 @@ public final class Translator {
      * The input line should consist of a single SML instruction,
      * with its label already removed.
      */
-    private Instruction getInstruction(String label) {
+    private Instruction getInstruction(String label) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         if (line.isEmpty())
             return null;
 
         String opcode = scan();
-        switch (opcode) {
-            case MovInstruction.OP_CODE -> {
-                String r = scan();
-                String s = scan();
-                return new MovInstruction(label, Register.valueOf(r), Integer.valueOf(s));
-            }
-            case OutInstruction.OP_CODE -> {
-                String r = scan();
-                String s = scan();
-                return new OutInstruction(label, Register.valueOf(r));
-            }
-            case JnzInstruction.OP_CODE -> {
-                String r = scan();
-                String s = scan();
-                return new JnzInstruction(label, Register.valueOf(r), s);
-            }
-            case AddInstruction.OP_CODE -> {
-                String r = scan();
-                String s = scan();
-                return new AddInstruction(label, Register.valueOf(r), Register.valueOf(s));
-            }
-            case SubInstruction.OP_CODE -> {
-                String r = scan();
-                String s = scan();
-                return new SubInstruction(label, Register.valueOf(r), Register.valueOf(s));
-            }
-            case MulInstruction.OP_CODE -> {
-                String r = scan();
-                String s = scan();
-                return new MulInstruction(label, Register.valueOf(r), Register.valueOf(s));
-            }
-            case DivInstruction.OP_CODE -> {
-                String r = scan();
-                String s = scan();
-                return new DivInstruction(label, Register.valueOf(r), Register.valueOf(s));
-            }
-            // TODO: add code for all other types of instructions
+        String r = scan();
+        String s = scan();
 
-            // TODO: Then, replace the switch by using the Reflection API
-
-            // TODO: Next, use dependency injection to allow this machine class
-            //       to work with different sets of opcodes (different CPUs)
-
-            default -> {
-                System.out.println("Unknown instruction: " + opcode);
-            }
+        if (OPERATIONS_MAP.containsKey(opcode)) {
+            Constructor[] testCons = classFromOpcode(opcode).getConstructors();
+            for (Constructor cons : testCons)
+                return (Instruction) cons.newInstance(label, Registers.Register.valueOf(r), s);
         }
+        else  {
+            System.out.println("Unknown instruction: " + opcode);
+        }
+
+//           // TODO: add code for all other types of instructions
+//
+//           // TODO: Then, replace the switch by using the Reflection API
+//
+//           // TODO: Next, use dependency injection to allow this machine class
+//               to work with different sets of opcodes (different CPUs)
+
         return null;
+    }
+    private static final Map<String, Class<?>> OPERATIONS_MAP = Map.of(
+            "mov", MovInstruction.class,
+            "out", OutInstruction.class,
+            "jnz", JnzInstruction.class,
+            "add", AddInstruction.class,
+            "sub", SubInstruction.class,
+            "mul", MulInstruction.class,
+            "div", DivInstruction.class
+    );
+
+    private static Class<?> classFromOpcode(String op) {
+        return OPERATIONS_MAP.get(op);
     }
 
 

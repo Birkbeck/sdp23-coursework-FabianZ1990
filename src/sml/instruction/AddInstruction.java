@@ -3,6 +3,7 @@ package sml.instruction;
 import sml.Instruction;
 import sml.Machine;
 import sml.RegisterName;
+import sml.Registers;
 
 // TODO: write a JavaDoc for the class
 
@@ -16,10 +17,10 @@ public class AddInstruction extends Instruction {
 
 	public static final String OP_CODE = "add";
 
-	public AddInstruction(String label, RegisterName result, RegisterName source) {
+	public AddInstruction(String label, RegisterName result, String source) {
 		super(label, OP_CODE);
 		this.result = result;
-		this.source = source;
+		this.source = Registers.Register.valueOf(source);
 	}
 
 	@Override

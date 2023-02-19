@@ -3,6 +3,7 @@ package sml.instruction;
 import sml.Instruction;
 import sml.Machine;
 import sml.RegisterName;
+import sml.Registers;
 
 public class SubInstruction extends Instruction {
 
@@ -11,12 +12,11 @@ public class SubInstruction extends Instruction {
 
     public static final String OP_CODE = "sub";
 
-    public SubInstruction(String label, RegisterName result, RegisterName source) {
+    public SubInstruction(String label, RegisterName result, String source) {
         super(label, OP_CODE);
         this.result = result;
-        this.source = source;
+        this.source = Registers.Register.valueOf(source);
     }
-
     @Override
     public int execute(Machine m) {
         int value1 = m.getRegisters().get(result);

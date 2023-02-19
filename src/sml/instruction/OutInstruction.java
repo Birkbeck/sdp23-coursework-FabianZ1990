@@ -16,7 +16,7 @@ public class OutInstruction extends Instruction {
 
     public static final String OP_CODE = "out";
 
-    public OutInstruction(String label, RegisterName result) {
+    public OutInstruction(String label, RegisterName result, String source) {
         super(label, OP_CODE);
         this.result = result;
     }
