@@ -1,5 +1,6 @@
 package sml;
 
+import sml.Exceptions.DuplicateLabelException;
 import sml.Exceptions.LabelNotFoundException;
 
 import java.util.Arrays;
@@ -30,7 +31,11 @@ public final class Labels {
 		// TODO: Add a check that there are no label duplicates.
 		if (Arrays.stream(labels.keySet().toArray())
 						.anyMatch(label::equals)) {
-			throw new IllegalArgumentException("Your input contains duplicate labels");
+			try {
+				throw new DuplicateLabelException("Your input contains the following duplicate label: " + label);
+			} catch (DuplicateLabelException e) {
+				throw new RuntimeException(e);
+			}
 		} else {
 			labels.put(label, address);
 		}

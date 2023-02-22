@@ -33,7 +33,7 @@ public final class Translator {
     // prog (the program)
     // return "no errors were detected"
 
-    public void readAndTranslate(Labels labels, List<Instruction> program) throws IOException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    public void readAndTranslate(Labels labels, List<Instruction> program) throws IOException {
         try (var sc = new Scanner(new File(fileName), StandardCharsets.UTF_8)) {
             labels.reset();
             program.clear();
