@@ -12,9 +12,9 @@ public class SubInstruction extends Instruction {
 
     public static final String OP_CODE = "sub";
 
-    public SubInstruction(String label, RegisterName result, String source) {
+    public SubInstruction(String label, String result, String source) {
         super(label, OP_CODE);
-        this.result = result;
+        this.result = Registers.Register.valueOf(result);
         this.source = Registers.Register.valueOf(source);
     }
     @Override

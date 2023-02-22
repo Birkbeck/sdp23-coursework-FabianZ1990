@@ -30,9 +30,9 @@ class AddInstructionTest {
 
   @Test
   void executeValid() {
-    registers.set(EAX, 5);
-    registers.set(EBX, 6);
-    Instruction instruction = new AddInstruction(null, EAX, EBX);
+    String result = "5";
+    String source = "6";
+    Instruction instruction = new AddInstruction(null, result, source);
     instruction.execute(machine);
     Assertions.assertEquals(11, machine.getRegisters().get(EAX));
   }

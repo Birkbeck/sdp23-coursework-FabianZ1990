@@ -62,7 +62,7 @@ public final class Translator {
      * The input line should consist of a single SML instruction,
      * with its label already removed.
      */
-    private Instruction getInstruction(String label) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    private Instruction getInstruction(String label)  {
         if (line.isEmpty())
             return null;
 
@@ -70,14 +70,20 @@ public final class Translator {
         String r = scan();
         String s = scan();
 
-        if (OPERATIONS_MAP.containsKey(opcode)) {
-            Constructor[] testCons = classFromOpcode(opcode).getConstructors();
-            for (Constructor cons : testCons)
-                return (Instruction) cons.newInstance(label, Registers.Register.valueOf(r), s);
+
+        ReflectionInstructionFactory RefInstruction = new ReflectionInstructionFactory();
+
+        try {
+            return RefInstruction.createInstruction(opcode, label, r, s);
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
         }
-        else  {
-            System.out.println("Unknown instruction: " + opcode);
-        }
+
+    }
 
 //           // TODO: add code for all other types of instructions
 //
@@ -86,21 +92,7 @@ public final class Translator {
 //           // TODO: Next, use dependency injection to allow this machine class
 //               to work with different sets of opcodes (different CPUs)
 
-        return null;
-    }
-    private static final Map<String, Class<?>> OPERATIONS_MAP = Map.of(
-            "mov", MovInstruction.class,
-            "out", OutInstruction.class,
-            "jnz", JnzInstruction.class,
-            "add", AddInstruction.class,
-            "sub", SubInstruction.class,
-            "mul", MulInstruction.class,
-            "div", DivInstruction.class
-    );
 
-    private static Class<?> classFromOpcode(String op) {
-        return OPERATIONS_MAP.get(op);
-    }
 
 
     private String getLabel() {

@@ -3,6 +3,7 @@ package sml.instruction;
 import sml.Instruction;
 import sml.Machine;
 import sml.RegisterName;
+import sml.Registers;
 
 // TODO: write a JavaDoc for the class
 
@@ -16,9 +17,9 @@ public class JnzInstruction extends Instruction {
 
     public static final String OP_CODE = "jnz";
 
-    public JnzInstruction(String label, RegisterName result, String labelToJump) {
+    public JnzInstruction(String label, String result, String labelToJump) {
         super(label, OP_CODE);
-        this.result = result;
+        this.result = Registers.Register.valueOf(result);
         this.nextLabel = labelToJump;
     }
 
