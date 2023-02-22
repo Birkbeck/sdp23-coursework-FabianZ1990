@@ -30,8 +30,10 @@ class AddInstructionTest {
 
   @Test
   void executeValid() {
-    String result = "5";
-    String source = "6";
+    registers.set(EAX, 5);
+    registers.set(EBX, 6);
+    String result = "EAX";
+    String source = "EBX";
     Instruction instruction = new AddInstruction(null, result, source);
     instruction.execute(machine);
     Assertions.assertEquals(11, machine.getRegisters().get(EAX));
@@ -41,7 +43,9 @@ class AddInstructionTest {
   void executeValidTwo() {
     registers.set(EAX, -5);
     registers.set(EBX, 6);
-    Instruction instruction = new AddInstruction(null, EAX, EBX);
+    String result = "EAX";
+    String source = "EBX";
+    Instruction instruction = new AddInstruction(null, result, source);
     instruction.execute(machine);
     Assertions.assertEquals(1, machine.getRegisters().get(EAX));
   }
@@ -49,7 +53,9 @@ class AddInstructionTest {
   void executeValidThree() {
     registers.set(EAX, -5);
     registers.set(EBX, 0);
-    Instruction instruction = new AddInstruction(null, EAX, EBX);
+    String result = "EAX";
+    String source = "EBX";
+    Instruction instruction = new AddInstruction(null, result, source);
     instruction.execute(machine);
     Assertions.assertEquals(-5, machine.getRegisters().get(EAX));
   }
@@ -57,7 +63,9 @@ class AddInstructionTest {
   void executeValidFour() {
     registers.set(EAX, -5);
     registers.set(EBX, -5);
-    Instruction instruction = new AddInstruction(null, EAX, EBX);
+    String result = "EAX";
+    String source = "EBX";
+    Instruction instruction = new AddInstruction(null, result, source);
     instruction.execute(machine);
     Assertions.assertEquals(-10, machine.getRegisters().get(EAX));
   }
@@ -65,14 +73,18 @@ class AddInstructionTest {
   void toStringValidOne() {
     registers.set(EAX, -5);
     registers.set(EBX, -5);
-    Instruction instruction = new AddInstruction(null, EAX, EBX);
+    String result = "EAX";
+    String source = "EBX";
+    Instruction instruction = new AddInstruction(null, result, source);
     Assertions.assertEquals("add EAX EBX", instruction.toString());
   }
   @Test
   void toStringValidTwoWithLabel() {
     registers.set(EAX, -5);
     registers.set(EBX, -5);
-    Instruction instruction = new AddInstruction("f2", EAX, EBX);
+    String result = "EAX";
+    String source = "EBX";
+    Instruction instruction = new AddInstruction("f2", result, source);
     Assertions.assertEquals("f2: add EAX EBX", instruction.toString());
   }
 }

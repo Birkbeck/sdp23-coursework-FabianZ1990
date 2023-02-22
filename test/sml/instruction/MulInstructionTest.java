@@ -32,7 +32,9 @@ class MulInstructionTest {
     void executeValid() {
         registers.set(EAX, 5);
         registers.set(EBX, 6);
-        Instruction instruction = new MulInstruction(null, EAX, EBX);
+        String result = "EAX";
+        String source = "EBX";
+        Instruction instruction = new MulInstruction(null, result, source);
         instruction.execute(machine);
         Assertions.assertEquals(30, machine.getRegisters().get(EAX));
     }
@@ -41,7 +43,9 @@ class MulInstructionTest {
     void executeValidTwo() {
         registers.set(EAX, -5);
         registers.set(EBX, 6);
-        Instruction instruction = new MulInstruction(null, EAX, EBX);
+        String result = "EAX";
+        String source = "EBX";
+        Instruction instruction = new MulInstruction(null, result, source);
         instruction.execute(machine);
         Assertions.assertEquals(-30, machine.getRegisters().get(EAX));
     }
@@ -49,7 +53,9 @@ class MulInstructionTest {
     void executeValidThree() {
         registers.set(EAX, -5);
         registers.set(EBX, -6);
-        Instruction instruction = new MulInstruction(null, EAX, EBX);
+        String result = "EAX";
+        String source = "EBX";
+        Instruction instruction = new MulInstruction(null, result, source);
         instruction.execute(machine);
         Assertions.assertEquals(30, machine.getRegisters().get(EAX));
     }
@@ -57,7 +63,9 @@ class MulInstructionTest {
     void executeValidFour() {
         registers.set(EAX, 0);
         registers.set(EBX, 6);
-        Instruction instruction = new MulInstruction(null, EAX, EBX);
+        String result = "EAX";
+        String source = "EBX";
+        Instruction instruction = new MulInstruction(null, result, source);
         instruction.execute(machine);
         Assertions.assertEquals(0, machine.getRegisters().get(EAX));
     }
@@ -65,7 +73,9 @@ class MulInstructionTest {
     void executeValidFive() {
         registers.set(EAX, -5);
         registers.set(EBX, 0);
-        Instruction instruction = new MulInstruction(null, EAX, EBX);
+        String result = "EAX";
+        String source = "EBX";
+        Instruction instruction = new MulInstruction(null, result, source);
         instruction.execute(machine);
         Assertions.assertEquals(0, machine.getRegisters().get(EAX));
     }
@@ -74,14 +84,18 @@ class MulInstructionTest {
     void toStringValidOne() {
         registers.set(EAX, -5);
         registers.set(EBX, -5);
-        Instruction instruction = new MulInstruction(null, EAX, EBX);
+        String result = "EAX";
+        String source = "EBX";
+        Instruction instruction = new MulInstruction(null, result, source);
         Assertions.assertEquals("mul EAX EBX", instruction.toString());
     }
     @Test
     void toStringValidTwoWithLabel() {
         registers.set(EAX, -5);
         registers.set(EBX, -5);
-        Instruction instruction = new MulInstruction("f2", EAX, EBX);
+        String result = "EAX";
+        String source = "EBX";
+        Instruction instruction = new MulInstruction("f2", result, source);
         Assertions.assertEquals("f2: mul EAX EBX", instruction.toString());
     }
 

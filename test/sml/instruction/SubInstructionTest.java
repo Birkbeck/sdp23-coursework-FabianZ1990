@@ -32,7 +32,9 @@ class SubInstructionTest {
     void executeValid() {
         registers.set(EAX, 5);
         registers.set(EBX, 6);
-        Instruction instruction = new SubInstruction(null, EAX, EBX);
+        String result = "EAX";
+        String source = "EBX";
+        Instruction instruction = new SubInstruction(null, result, source);
         instruction.execute(machine);
         Assertions.assertEquals(-1, machine.getRegisters().get(EAX));
     }
@@ -41,7 +43,9 @@ class SubInstructionTest {
     void executeValidTwo() {
         registers.set(EAX, -5);
         registers.set(EBX, 6);
-        Instruction instruction = new SubInstruction(null, EAX, EBX);
+        String result = "EAX";
+        String source = "EBX";
+        Instruction instruction = new SubInstruction(null, result, source);
         instruction.execute(machine);
         Assertions.assertEquals(-11, machine.getRegisters().get(EAX));
     }
@@ -49,7 +53,9 @@ class SubInstructionTest {
     void executeValidThree() {
         registers.set(EAX, -5);
         registers.set(EBX, 0);
-        Instruction instruction = new SubInstruction(null, EAX, EBX);
+        String result = "EAX";
+        String source = "EBX";
+        Instruction instruction = new SubInstruction(null, result, source);
         instruction.execute(machine);
         Assertions.assertEquals(-5, machine.getRegisters().get(EAX));
     }
@@ -57,7 +63,9 @@ class SubInstructionTest {
     void executeValidFour() {
         registers.set(EAX, -5);
         registers.set(EBX, -5);
-        Instruction instruction = new SubInstruction(null, EAX, EBX);
+        String result = "EAX";
+        String source = "EBX";
+        Instruction instruction = new SubInstruction(null, result, source);
         instruction.execute(machine);
         Assertions.assertEquals(0, machine.getRegisters().get(EAX));
     }
@@ -65,14 +73,18 @@ class SubInstructionTest {
     void toStringValidOne() {
         registers.set(EAX, -5);
         registers.set(EBX, -5);
-        Instruction instruction = new SubInstruction(null, EAX, EBX);
+        String result = "EAX";
+        String source = "EBX";
+        Instruction instruction = new SubInstruction(null, result, source);
         Assertions.assertEquals("sub EAX EBX", instruction.toString());
     }
     @Test
     void toStringValidTwoWithLabel() {
         registers.set(EAX, -5);
         registers.set(EBX, -5);
-        Instruction instruction = new SubInstruction("f2", EAX, EBX);
+        String result = "EAX";
+        String source = "EBX";
+        Instruction instruction = new SubInstruction("f2", result, source);
         Assertions.assertEquals("f2: sub EAX EBX", instruction.toString());
     }
 }
