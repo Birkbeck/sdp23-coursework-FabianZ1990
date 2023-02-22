@@ -1,5 +1,7 @@
 package sml;
 
+import sml.Exceptions.LabelNotFoundException;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +42,7 @@ public final class Labels {
 	 * @param label the label
 	 * @return the address the label refers to
 	 */
-	public int getAddress(String label) {
+	public int getAddress(String label) throws LabelNotFoundException {
 		// TODO: Where can NullPointerException be thrown here?
 		//       (Write an explanation.)
 		//       Add code to deal with non-existent labels.
@@ -50,7 +52,7 @@ public final class Labels {
 		// NullPointerException occurs if the code tries to use this null value for further steps (in this case an address (integer) should be returned).
 		// In case of this specific program, "null" can't be converted to int and the program fails with NullPointerException.
 		if (!labels.containsKey(label)) {
-			return NORMAL_PROGRAM_COUNTER_UPDATE;
+			throw new LabelNotFoundException("The following label was not found: " + label);
 		}
 		else
 		return labels.get(label);

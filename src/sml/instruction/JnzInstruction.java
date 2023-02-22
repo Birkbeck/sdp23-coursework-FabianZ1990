@@ -1,5 +1,6 @@
 package sml.instruction;
 
+import sml.Exceptions.LabelNotFoundException;
 import sml.Instruction;
 import sml.Machine;
 import sml.RegisterName;
@@ -29,7 +30,11 @@ public class JnzInstruction extends Instruction {
         if (value1 == 0) {
             return NORMAL_PROGRAM_COUNTER_UPDATE;
         } else {
-            return m.getLabels().getAddress(this.nextLabel);
+            try {
+                return m.getLabels().getAddress(this.nextLabel);
+            } catch (LabelNotFoundException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
