@@ -12,8 +12,11 @@ public class ReflectionInstructionFactory {
 public Instruction createInstruction(String opcode, String label, String result, String source) throws InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
 
     if (OPERATIONS_MAP.containsKey(opcode)) {
-        Constructor cons= classFromOpcode(opcode).getDeclaredConstructor();
-        return (Instruction) cons.newInstance(label, result, source);
+
+        Constructor<?>[] cons = classFromOpcode(opcode).getDeclaredConstructors();
+
+        //Constructor<?> cons= classFromOpcode(opcode).getDeclaredConstructor(String.class, String.class, String.class);
+        return (Instruction) cons[0].newInstance(label, result, source);
     }
     else  {
         System.out.println("Unknown instruction: " + opcode);
