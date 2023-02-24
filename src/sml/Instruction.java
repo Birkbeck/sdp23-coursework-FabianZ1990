@@ -23,7 +23,7 @@ public abstract class Instruction {
 	public Instruction(String label, String opcode) {
 		this.label = label;
 
-		if (ReflectionInstructionFactory.OPERATIONS_MAP.containsKey(opcode)) {
+		if (InstructionList.containsOpcode(opcode)) {
 			this.opcode = opcode;
 		}
 		else { throw new IllegalArgumentException("Not a valid opcode");}
