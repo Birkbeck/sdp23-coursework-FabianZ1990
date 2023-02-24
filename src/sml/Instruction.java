@@ -23,7 +23,7 @@ public abstract class Instruction {
 	public Instruction(String label, String opcode) {
 		this.label = label;
 
-		if (opcode.matches("add|sub|mul|div|out|mov|jnz")) {
+		if (ReflectionInstructionFactory.OPERATIONS_MAP.containsKey(opcode)) {
 			this.opcode = opcode;
 		}
 		else { throw new IllegalArgumentException("Not a valid opcode");}
@@ -67,7 +67,7 @@ public abstract class Instruction {
 
 	// TODO: Make sure that subclasses also implement equals and hashCode (needed in class Machine).
 
-	protected abstract boolean equals(Instruction ins);
+	public abstract boolean equals(Object o);
 	public abstract int hashCode();
 
 

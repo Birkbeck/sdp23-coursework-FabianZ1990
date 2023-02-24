@@ -87,5 +87,52 @@ class AddInstructionTest {
     Instruction instruction = new AddInstruction("f2", result, source);
     Assertions.assertEquals("f2: add EAX EBX", instruction.toString());
   }
+
+  @Test
+  void equalsValid() {
+    registers.set(EAX, -5);
+    registers.set(EBX, -5);
+    String result = "EAX";
+    String source = "EBX";
+    Instruction instruction = new AddInstruction("f2", result, source);
+    Instruction instruction2 = new AddInstruction("f2", result, source);
+    Assertions.assertEquals(true, instruction.equals(instruction2));
+  }
+
+  @Test
+  void equalsInvalid1() {
+    registers.set(EAX, -5);
+    registers.set(EBX, -5);
+    String result = "EAX";
+    String source = "EBX";
+    Instruction instruction = new AddInstruction("f2", result, source);
+    Instruction instruction2 = new DivInstruction("f2", result, source);
+    Assertions.assertEquals(false, instruction.equals(instruction2));
+  }
+  @Test
+  void equalsInvalid2() {
+    registers.set(EAX, -5);
+    registers.set(EBX, -5);
+    registers.set(ECX, -5);
+    registers.set(EDX, -5);
+    String result = "EAX";
+    String source = "EBX";
+    String result2 = "ECX";
+    String source2 = "EDX";
+    Instruction instruction = new AddInstruction("f2", result, source);
+    Instruction instruction2 = new AddInstruction("f2", result2, source2);
+    Assertions.assertEquals(false, instruction.equals(instruction2));
+  }
+  @Test
+  void equalsInvalid3() {
+    registers.set(EAX, -5);
+    registers.set(EBX, -5);
+    String result = "EAX";
+    String source = "EBX";
+    Instruction instruction = new AddInstruction("f2", result, source);
+    Instruction instruction2 = new AddInstruction("f3", result, source);
+    Assertions.assertEquals(false, instruction.equals(instruction2));
+  }
+
 }
 

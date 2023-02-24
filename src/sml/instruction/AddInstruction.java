@@ -37,7 +37,13 @@ public class AddInstruction extends Instruction {
 	}
 
 	@Override
-	protected boolean equals(Instruction ins) {
+	public boolean equals(Object otherObject) {
+		if (this == otherObject) {
+			return true;
+		}
+		else if (otherObject instanceof AddInstruction other)
+			return
+					this.source.equals(other.source) && this.result.equals(other.result) && this.opcode.equals(other.opcode) && this.label.equals(other.label);
 		return false;
 	}
 

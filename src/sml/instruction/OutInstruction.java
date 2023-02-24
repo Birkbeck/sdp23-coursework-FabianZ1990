@@ -35,7 +35,7 @@ public class OutInstruction extends Instruction {
     }
 
     @Override
-    protected boolean equals(Instruction ins) {
+    public boolean equals(Object otherObject) {
         return false;
     }
 
