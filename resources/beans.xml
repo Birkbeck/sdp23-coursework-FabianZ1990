@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress SpringFacetInspection -->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans	
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+    <bean id="mov" class="sml.instruction.MovInstruction" scope="prototype">
+    </bean>
+
+    <bean id="out" class="sml.instruction.OutInstruction" scope="prototype">
+    </bean>
+
+    <bean id="jnz" class="sml.instruction.JnzInstruction" scope="prototype">
+    </bean>
+
+    <bean id="add" class="sml.instruction.AddInstruction" scope="prototype">
+    </bean>
+
+    <bean id="sub" class="sml.instruction.SubInstruction" scope="prototype">
+    </bean>
+
+    <bean id="mul" class="sml.instruction.MulInstruction" scope="prototype">
+    </bean>
+
+    <bean id="div" class="sml.instruction.DivInstruction" scope="prototype">
+    </bean>
+
+</beans>
