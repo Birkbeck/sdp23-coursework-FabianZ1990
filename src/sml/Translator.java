@@ -4,12 +4,16 @@ import sml.instruction.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Map;
+
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * This class ....
@@ -62,7 +66,7 @@ public final class Translator {
      * The input line should consist of a single SML instruction,
      * with its label already removed.
      */
-    private Instruction getInstruction(String label)  {
+    private Instruction getInstruction(String label) {
         if (line.isEmpty())
             return null;
 
@@ -70,22 +74,19 @@ public final class Translator {
         String r = scan();
         String s = scan();
 
+        ArrayList<String> input = new ArrayList<>();
 
-        ReflectionInstructionFactory RefInstruction = new ReflectionInstructionFactory();
+        input.add(label);
+        input.add(r);
+        input.add(s);
 
-        try {
-            return RefInstruction.createInstruction(opcode, label, r, s);
-        } catch (InvocationTargetException e) {
-            throw new RuntimeException(e);
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
+
+        var factory = new ClassPathXmlApplicationContext("/beans.xml");
+
+    return (Instruction) factory.getBean(opcode, input.toArray());
 
     }
+
 
 //           // TODO: add code for all other types of instructions
 //
