@@ -32,6 +32,12 @@ public class SubInstruction extends Instruction {
 
     @Override
     public boolean equals(Object otherObject) {
+        if (this == otherObject) {
+            return true;
+        }
+        else if (otherObject instanceof SubInstruction other)
+            return
+                    this.source.equals(other.source) && this.result.equals(other.result) && this.opcode.equals(other.opcode) && this.label.equals(other.label);
         return false;
     }
 

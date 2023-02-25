@@ -36,6 +36,12 @@ public class OutInstruction extends Instruction {
 
     @Override
     public boolean equals(Object otherObject) {
+        if (this == otherObject) {
+            return true;
+        }
+        else if (otherObject instanceof OutInstruction other)
+            return
+                    this.result.equals(other.result) && this.opcode.equals(other.opcode) && this.label.equals(other.label);
         return false;
     }
 

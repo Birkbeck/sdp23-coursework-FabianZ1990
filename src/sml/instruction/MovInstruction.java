@@ -36,6 +36,12 @@ public class MovInstruction extends Instruction {
 
     @Override
     public boolean equals(Object otherObject) {
+        if (this == otherObject) {
+            return true;
+        }
+        else if (otherObject instanceof MovInstruction other)
+            return
+                    this.source == other.source && this.result.equals(other.result) && this.opcode.equals(other.opcode) && this.label.equals(other.label);
         return false;
     }
 
