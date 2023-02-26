@@ -32,9 +32,7 @@ class OutInstructionTest {
     void executeValid() {
         registers.set(EAX, 5);
         registers.set(EBX, 6);
-        String result = "EAX";
-        String source = "EBX";
-        Instruction instruction = new OutInstruction(null, result, source);
+        Instruction instruction = new OutInstruction(null, EAX);
         instruction.execute(machine);
         Assertions.assertEquals("The current value stored in register EAX is 5",
                 "The current value stored in register " + EAX.name() + " is " + machine.getRegisters().get(EAX));
@@ -44,9 +42,7 @@ class OutInstructionTest {
     void executeValidTwo() {
         registers.set(EAX, -5);
         registers.set(EBX, 6);
-        String result = "EAX";
-        String source = "EBX";
-        Instruction instruction = new OutInstruction(null, result, source);
+        Instruction instruction = new OutInstruction(null, EAX);
         instruction.execute(machine);
         Assertions.assertEquals("The current value stored in register EAX is -5",
                 "The current value stored in register " + EAX.name() + " is " + machine.getRegisters().get(EAX));
@@ -55,18 +51,14 @@ class OutInstructionTest {
     void toStringValidOne() {
         registers.set(EAX, -5);
         registers.set(EBX, -5);
-        String result = "EAX";
-        String source = "EBX";
-        Instruction instruction = new OutInstruction(null, result, source);
+        Instruction instruction = new OutInstruction(null, EAX);
         Assertions.assertEquals("out EAX", instruction.toString());
     }
     @Test
     void toStringValidTwoWithLabel() {
         registers.set(EAX, -5);
         registers.set(EBX, -5);
-        String result = "EAX";
-        String source = "EBX";
-        Instruction instruction = new OutInstruction("f2", result, source);
+        Instruction instruction = new OutInstruction("f2", EAX);
         Assertions.assertEquals("f2: out EAX", instruction.toString());
     }
 }

@@ -34,12 +34,10 @@ class JnzInstructionTest {
         registers.set(EBX, 6);
         machine.getLabels().addLabel("f1", 0);
         machine.getLabels().addLabel("f2", 1);
-        String result = "EAX";
-        String source = "EBX";
-        Instruction instruction2 = new AddInstruction("f1", result, source);
+        Instruction instruction2 = new AddInstruction("f1", EAX, EBX);
         instruction2.execute(machine);
         String nextLabel = "f1";
-        Instruction instruction = new JnzInstruction("f2", result, nextLabel);
+        Instruction instruction = new JnzInstruction("f2", EAX, nextLabel);
         instruction.execute(machine);
         Assertions.assertEquals(0,instruction.execute(machine));
     }
@@ -50,12 +48,10 @@ class JnzInstructionTest {
         registers.set(EBX, 0);
         machine.getLabels().addLabel("f1", 0);
         machine.getLabels().addLabel("f2", 1);
-        String result = "EAX";
-        String source = "EBX";
-        Instruction instruction2 = new AddInstruction("f1", result, source);
+        Instruction instruction2 = new AddInstruction("f1", EAX, EBX);
         instruction2.execute(machine);
         String nextLabel = "f1";
-        Instruction instruction = new JnzInstruction("f2", result, nextLabel);
+        Instruction instruction = new JnzInstruction("f2", EAX, nextLabel);
         instruction.execute(machine);
         Assertions.assertEquals(Instruction.NORMAL_PROGRAM_COUNTER_UPDATE,instruction.execute(machine));
     }
@@ -64,9 +60,7 @@ class JnzInstructionTest {
         registers.set(EAX, -5);
         registers.set(EBX, -5);
         String nextLabel = "f1";
-        String result = "EAX";
-        String source = "EBX";
-        Instruction instruction = new JnzInstruction(null, result, nextLabel);
+        Instruction instruction = new JnzInstruction(null, EAX, nextLabel);
         Assertions.assertEquals("jnz EAX f1", instruction.toString());
     }
     @Test
@@ -74,9 +68,7 @@ class JnzInstructionTest {
         registers.set(EAX, -5);
         registers.set(EBX, -5);
         String nextLabel = "f1";
-        String result = "EAX";
-        String source = "EBX";
-        Instruction instruction = new JnzInstruction("f2", result, nextLabel);
+        Instruction instruction = new JnzInstruction("f2", EAX, nextLabel);
         Assertions.assertEquals("f2: jnz EAX f1", instruction.toString());
     }
 }
