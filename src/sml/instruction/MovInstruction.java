@@ -17,6 +17,12 @@ public class MovInstruction extends Instruction {
 
     public static final String OP_CODE = "mov";
 
+    public MovInstruction(String label, RegisterName result, int source) {
+        super(label, OP_CODE);
+        this.result = result;
+        this.source = source;
+    }
+
     public MovInstruction(String label, String result, String source) {
         super(label, OP_CODE);
         this.result = Registers.Register.valueOf(result);

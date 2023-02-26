@@ -17,6 +17,12 @@ public class AddInstruction extends Instruction {
 
 	public static final String OP_CODE = "add";
 
+	public AddInstruction(String label, RegisterName result, RegisterName source) {
+		super(label, OP_CODE);
+		this.result = source;
+		this.source = result;
+	}
+
 	public AddInstruction(String label, String result, String source) {
 		super(label, OP_CODE);
 		this.result = Registers.Register.valueOf(result);

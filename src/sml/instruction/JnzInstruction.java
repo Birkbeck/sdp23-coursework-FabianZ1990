@@ -18,6 +18,13 @@ public class JnzInstruction extends Instruction {
 
     public static final String OP_CODE = "jnz";
 
+
+    public JnzInstruction(String label, RegisterName result, String labelToJump) {
+        super(label, OP_CODE);
+        this.result = result;
+        this.nextLabel = labelToJump;
+    }
+
     public JnzInstruction(String label, String result, String labelToJump) {
         super(label, OP_CODE);
         this.result = Registers.Register.valueOf(result);

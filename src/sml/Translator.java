@@ -81,12 +81,12 @@ public final class Translator {
         input.add(s);
 
 
-        var factory = new ClassPathXmlApplicationContext("/beans.xml");
+        //var factory = new ClassPathXmlApplicationContext("/beans.xml");
 
-        ReflectionInstructionFactory getInstruction = new ReflectionInstructionFactory();
+        ReflectionInstructionFactory getInstruction = ReflectionInstructionFactory.getInstance();
 
         try {
-            return getInstruction.createInstruction(opcode, label, r, s);
+            return getInstruction.createInstruction(opcode, input.toArray());
         } catch (InvocationTargetException e) {
             throw new RuntimeException(e);
         } catch (InstantiationException e) {

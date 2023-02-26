@@ -17,6 +17,12 @@ public class DivInstruction extends Instruction {
 
     public static final String OP_CODE = "div";
 
+    public DivInstruction(String label, RegisterName result, RegisterName source) {
+        super(label, OP_CODE);
+        this.result = result;
+        this.source = source;
+    }
+
     public DivInstruction(String label, String result, String source) {
         super(label, OP_CODE);
         this.result = Registers.Register.valueOf(result);
