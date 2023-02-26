@@ -8,6 +8,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Map;
 
+import static java.lang.System.exit;
+
 public class ReflectionInstructionFactory {
 
 private static ReflectionInstructionFactory factory;
@@ -26,24 +28,27 @@ public static ReflectionInstructionFactory getInstance()
 
 }
 
-public Instruction createInstruction(String opcode, ArrayList<String> args) throws InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException, ClassNotFoundException {
-
-    if (InstructionList.containsOpcode(opcode)) {
-
+public Instruction createInstruction(String opcode, ArrayList<String> args) throws InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException, OpcodeNotFoundException {
 
 
         String instructionFromOpcode = "sml.instruction." + opcode.substring(0,1).toUpperCase() + opcode.substring(1) + "Instruction";
 
-        Constructor<?>[] cons = Class.forName(instructionFromOpcode).getDeclaredConstructors();
 
+    Constructor<?>[] cons = new Constructor[0];
 
-        ArrayList<Object> passOnParameters = new ArrayList<>();
+    try {
+        cons = Class.forName(instructionFromOpcode).getDeclaredConstructors();
+    } catch (ClassNotFoundException e) {
+        throw new OpcodeNotFoundException("Unknown instruction: "  + opcode +  " - The program will be terminated.");
+    }
+
+    ArrayList<Object> passOnParameters = new ArrayList<>();
 
         passOnParameters.add(args.get(0));                                                                              //label has to be added as a string even if it is numeric
 
         Class[] constructorParameters = cons[0].getParameterTypes();
 
-          for (int x = 1; x < constructorParameters.length; x++) {
+        for (int x = 1; x < constructorParameters.length; x++) {
               if (constructorParameters[x].getName().equals("sml.RegisterName")) {
                 passOnParameters.add(Registers.Register.valueOf(args.get(x)));
               }
@@ -58,16 +63,16 @@ public Instruction createInstruction(String opcode, ArrayList<String> args) thro
 
         return (Instruction) cons[0].newInstance(passOnParameters.toArray());
     }
-    else  {
-        System.out.println("Unknown instruction: " + opcode);
+//    else  {
+//
+//        throw new OpcodeNotFoundException("Unknown instruction: "  + opcode +  " - The program will be terminated.");
+//
+
     }
 
-    return null;
-}
 
 
 
-}
 
 
 

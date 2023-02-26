@@ -5,7 +5,10 @@ package sml;
 import java.io.IOException;
 
 /**
- * Represents an abstract instruction.
+ * Represents an abstract instruction. Serves as a superclass for all different SML instructions. Provides variables
+ * opcode and label, which are both inherited by the subclasses, and the static variable STANDARD_PROGRAM_COUNTER_UPDATE,
+ * which serves as the default (program counter is decreased by one, which executes the next line), unless a specific program counter
+ * update is provided.
  *
  * @author ...
  */
@@ -22,12 +25,9 @@ public abstract class Instruction {
 	 */
 	public Instruction(String label, String opcode) {
 		this.label = label;
-
-		if (InstructionList.containsOpcode(opcode)) {
-			this.opcode = opcode;
+		this.opcode = opcode;
 		}
-		else { throw new IllegalArgumentException("Not a valid opcode");}
-	}
+
 
 	public String getLabel() {
 		return label;

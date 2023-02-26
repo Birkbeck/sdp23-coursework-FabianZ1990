@@ -1,5 +1,6 @@
 package sml;
 
+import sml.Exceptions.OpcodeNotFoundException;
 import sml.instruction.*;
 
 import java.io.File;
@@ -87,7 +88,7 @@ public final class Translator {
 
        try {
            return getInstruction.createInstruction(opcode, input);
-       } catch (InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException | ClassNotFoundException e) {
+       } catch (InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException | OpcodeNotFoundException e) {
            throw new RuntimeException(e);
        }
         //return (Instruction) factory.getBean(opcode, input.toArray());
