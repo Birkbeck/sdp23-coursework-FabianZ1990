@@ -6,8 +6,12 @@ import java.util.stream.Collectors;
 // TODO: write a JavaDoc for the class
 
 /**
+ *This class creates a certain number of different registers (at the moment 8 different ones)
+ *Registers are organised in a Map, with the register name as Key, and the value stored as the Value
+ *Class is final, upon instantiation, the clear() method is called, which sets all 8 registers back to a stored value of 0.
+ *No additional registers can be added by other classes
  *
- * @author ...
+ * @author Fabian Zischler
  */
 public final class Registers {
     private final Map<Register, Integer> registers = new HashMap<>();
