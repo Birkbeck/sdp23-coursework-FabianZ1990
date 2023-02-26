@@ -14,8 +14,11 @@ import static sml.Instruction.NORMAL_PROGRAM_COUNTER_UPDATE;
 // TODO: write a JavaDoc for the class
 
 /**
- *
- * @author ...
+ *Organises the labels for the different instructions (especially important for Instructions that require a jump, like the JnzInstruction)
+ *Labels are put into a map, with the label name (String) as key, and the address (number of line in the SML file where the label occurs first)
+ *as the value. Labels have to be unique, because they are identifiers for the program counter. Trying to add duplicates will throw an exception
+ *This class is used by the Translator class, which uses the addLabel method to add more labels to the Map.
+ * @author Fabian Zischler
  */
 public final class Labels {
 	private final Map<String, Integer> labels = new HashMap<>();
