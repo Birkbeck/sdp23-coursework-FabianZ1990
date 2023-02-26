@@ -19,8 +19,8 @@ public class AddInstruction extends Instruction {
 
 	public AddInstruction(String label, RegisterName result, RegisterName source) {
 		super(label, OP_CODE);
-		this.result = source;
-		this.source = result;
+		this.result = result;
+		this.source = source;
 	}
 
 	public AddInstruction(String label, String result, String source) {
