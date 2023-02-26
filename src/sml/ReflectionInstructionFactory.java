@@ -31,10 +31,10 @@ public static ReflectionInstructionFactory getInstance()
 public Instruction createInstruction(String opcode, ArrayList<String> args) throws InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException, OpcodeNotFoundException {
 
 
-        String instructionFromOpcode = "sml.instruction." + opcode.substring(0,1).toUpperCase() + opcode.substring(1) + "Instruction";
+    String instructionFromOpcode = "sml.instruction." + opcode.substring(0,1).toUpperCase() + opcode.substring(1) + "Instruction";
 
 
-    Constructor<?>[] cons = new Constructor[0];
+    Constructor<?>[] cons;
 
     try {
         cons = Class.forName(instructionFromOpcode).getDeclaredConstructors();

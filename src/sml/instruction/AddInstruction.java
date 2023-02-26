@@ -10,7 +10,10 @@ import java.util.Objects;
 // TODO: write a JavaDoc for the class
 
 /**
- * @author
+ * Takes values of 2 registers and adds them together. Stores the result in the first of the two registers (order is determined by the SML file)
+ *
+ *
+ * @author Fabian Zischler
  */
 
 public class AddInstruction extends Instruction {
@@ -19,11 +22,21 @@ public class AddInstruction extends Instruction {
 
 	public static final String OP_CODE = "add";
 
+
+	/**
+	 * Constructor: a String with a label (can be null), as well as two registers on which values the arithmetic instruction is performed
+	 *
+	 * @param label optional label (can be null)
+	 * @param result first register. Value will be added to the value of source and the result will be stored in this register
+	 * @param source second register. Value will be added to the value of result. Register keeps original value after the operation.
+	 */
+
 	public AddInstruction(String label, RegisterName result, RegisterName source) {
 		super(label, OP_CODE);
 		this.result = result;
 		this.source = source;
 	}
+
 
 	public AddInstruction(String label, String result, String source) {
 		super(label, OP_CODE);

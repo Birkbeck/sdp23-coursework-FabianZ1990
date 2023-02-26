@@ -20,6 +20,14 @@ public class JnzInstruction extends Instruction {
 
     public static final String OP_CODE = "jnz";
 
+    /**
+     * Constructor: a String with a label (can be null) and a register which value is checked, and a String with a label for a potential jump.
+     *
+     * @param label optional label (can be null)
+     * @param result first register. Will be checked for value of 0, if higher, a jump to label "labelToJump" is executed. If value is 0
+     *               program will continue normally (with next line)
+     * @param labelToJump label to which line the program will jump if the value in result is not 0.
+     */
 
     public JnzInstruction(String label, RegisterName result, String labelToJump) {
         super(label, OP_CODE);

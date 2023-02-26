@@ -10,7 +10,7 @@ import java.io.IOException;
  * which serves as the default (program counter is decreased by one, which executes the next line), unless a specific program counter
  * update is provided.
  *
- * @author ...
+ * @author Fabian Zischler
  */
 public abstract class Instruction {
 	protected final String label;
