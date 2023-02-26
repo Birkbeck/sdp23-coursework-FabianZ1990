@@ -25,34 +25,37 @@ public static ReflectionInstructionFactory getInstance()
 
 }
 
-public Instruction createInstruction(String opcode, Object [] args) throws InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException, ClassNotFoundException {
+public Instruction createInstruction(String opcode, ArrayList<String> args) throws InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException, ClassNotFoundException {
 
     if (InstructionList.containsOpcode(opcode)) {
 
         String instructionFromOpcode = "sml.instruction." + opcode.substring(0,1).toUpperCase() + opcode.substring(1) + "Instruction";
         Constructor<?>[] cons = Class.forName(instructionFromOpcode).getDeclaredConstructors();
-//        ArrayList<Object> parameterInput = new ArrayList<>();
-//        parameterInput.add(label);
-//        parameterInput.add(result);
-//        parameterInput.add(source);
-//
-//        Class[] constructorParameters = cons[0].getParameterTypes();
-//
-//        if (constructorParameters[0].getName() == "java.lang.String" )  {
-//
-//        }
 
-//        for (Class con : a) {
-//            System.out.println(con.getName());}
+        ArrayList<Object> passOnParameters = new ArrayList<>();
 
-        //Constructor<?>[] cons = InstructionList.classFromOpcode(opcode).getDeclaredConstructors();
-        //Constructor<?> cons= classFromOpcode(opcode).getDeclaredConstructor(String.class, String.class, String.class);
-        return (Instruction) cons[1].newInstance(args);
+        passOnParameters.add(args.get(0));                                                                              //label has to be added as a string even if it is numeric
+
+        Class[] constructorParameters = cons[0].getParameterTypes();
+
+          for (int x = 1; x < constructorParameters.length; x++) {
+              if (constructorParameters[x].getName().equals("sml.RegisterName")) {
+                passOnParameters.add(Registers.Register.valueOf(args.get(x)));
+              }
+              else if ((constructorParameters[x].getName().equals("int") && NumericCheck.isNumeric(args.get(x))))   {
+                  passOnParameters.add(Integer.parseInt(args.get(x)));
+              }
+              else {
+                  passOnParameters.add(args.get(x));
+          }
+
+       }
+
+        return (Instruction) cons[0].newInstance(passOnParameters.toArray());
     }
     else  {
         System.out.println("Unknown instruction: " + opcode);
     }
-
 
     return null;
 }

@@ -86,7 +86,7 @@ public final class Translator {
         ReflectionInstructionFactory getInstruction = ReflectionInstructionFactory.getInstance();
 
         try {
-            return getInstruction.createInstruction(opcode, input.toArray());
+            return getInstruction.createInstruction(opcode, input);
         } catch (InvocationTargetException e) {
             throw new RuntimeException(e);
         } catch (InstantiationException e) {
