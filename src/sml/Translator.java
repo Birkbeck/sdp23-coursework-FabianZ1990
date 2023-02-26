@@ -87,15 +87,7 @@ public final class Translator {
 
        try {
            return getInstruction.createInstruction(opcode, input);
-       } catch (InvocationTargetException e) {
-           throw new RuntimeException(e);
-       } catch (InstantiationException e) {
-           throw new RuntimeException(e);
-       } catch (IllegalAccessException e) {
-           throw new RuntimeException(e);
-       } catch (NoSuchMethodException e) {
-           throw new RuntimeException(e);
-       } catch (ClassNotFoundException e) {
+       } catch (InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException | ClassNotFoundException e) {
            throw new RuntimeException(e);
        }
         //return (Instruction) factory.getBean(opcode, input.toArray());

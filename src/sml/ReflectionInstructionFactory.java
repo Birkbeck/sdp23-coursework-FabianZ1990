@@ -1,5 +1,6 @@
 package sml;
 
+import sml.Exceptions.OpcodeNotFoundException;
 import sml.instruction.*;
 
 import java.lang.reflect.Constructor;
@@ -29,8 +30,12 @@ public Instruction createInstruction(String opcode, ArrayList<String> args) thro
 
     if (InstructionList.containsOpcode(opcode)) {
 
+
+
         String instructionFromOpcode = "sml.instruction." + opcode.substring(0,1).toUpperCase() + opcode.substring(1) + "Instruction";
+
         Constructor<?>[] cons = Class.forName(instructionFromOpcode).getDeclaredConstructors();
+
 
         ArrayList<Object> passOnParameters = new ArrayList<>();
 
