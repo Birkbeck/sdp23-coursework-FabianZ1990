@@ -41,6 +41,13 @@ public class JnzInstruction extends Instruction {
         this.nextLabel = labelToJump;
     }
 
+    /**
+     * Executes the arithmetic instruction, sets the registers to new values and returns a program counter update.
+     * As this is a jump instruction, the program counter value that is returned can be different from the normal update.
+     *
+     * @param m Machine file that contains an Instruction of that type.
+     */
+
     @Override
     public int execute(Machine m) {
         int value1 = m.getRegisters().get(result);

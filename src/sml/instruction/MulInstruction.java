@@ -19,6 +19,14 @@ public class MulInstruction extends Instruction {
 
     public static final String OP_CODE = "mul";
 
+    /**
+     * Constructor: a String with a label (can be null), as well as two registers on which values the arithmetic instruction is performed
+     *
+     * @param label optional label (can be null)
+     * @param result first register. Value will be multiplied with the value of source and the result will be stored in this register
+     * @param source second register. Value will be multiplied with the value of result. Register keeps original value after the operation.
+     */
+
     public MulInstruction(String label, RegisterName result, RegisterName source) {
         super(label, OP_CODE);
         this.result = result;
@@ -30,7 +38,11 @@ public class MulInstruction extends Instruction {
         this.result = Registers.Register.valueOf(result);
         this.source = Registers.Register.valueOf(source);
     }
-
+    /**
+     * Executes the arithmetic instruction, sets the registers to new values and returns a program counter update.
+     *
+     * @param m Machine file that contains an Instruction of that type.
+     */
     @Override
     public int execute(Machine m) {
         int value1 = m.getRegisters().get(result);

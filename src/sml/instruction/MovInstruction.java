@@ -19,6 +19,15 @@ public class MovInstruction extends Instruction {
 
     public static final String OP_CODE = "mov";
 
+
+    /**
+     * Constructor: a String with a label (can be null), as well as two registers on which values the arithmetic instruction is performed
+     *
+     * @param label optional label (can be null)
+     * @param result first register. Value from source (int) will be stored in this register
+     * @param source Integer number. Value will be stored in register result.
+     */
+
     public MovInstruction(String label, RegisterName result, int source) {
         super(label, OP_CODE);
         this.result = result;
@@ -30,6 +39,12 @@ public class MovInstruction extends Instruction {
         this.result = Registers.Register.valueOf(result);
         this.source = Integer.valueOf(source);
     }
+
+    /**
+     * Executes the loading instruction, sets the registers to new values and returns a program counter update.
+     *
+     * @param m Machine file that contains an Instruction of that type.
+     */
 
     @Override
     public int execute(Machine m) {

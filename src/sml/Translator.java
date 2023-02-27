@@ -19,7 +19,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
  * This class ....
  * <p>
- * The translator of a <b>S</b><b>M</b>al<b>L</b> program.
+ * The translator of a <b>S</b><b>M<b>L</b> program.
  *
  * @author ...
  */

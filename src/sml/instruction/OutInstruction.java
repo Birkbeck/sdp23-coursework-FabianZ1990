@@ -19,6 +19,13 @@ public class OutInstruction extends Instruction {
 
     public static final String OP_CODE = "out";
 
+    /**
+     * Constructor: a String with a label (can be null), as well as two registers on which values the arithmetic instruction is performed
+     *
+     * @param label optional label (can be null)
+     * @param result first register. Value of this register will be printed out to the console. Value stays the same afterwards.
+     */
+
     public OutInstruction(String label, RegisterName result) {
         super(label, OP_CODE);
         this.result = result;
@@ -28,7 +35,11 @@ public class OutInstruction extends Instruction {
         super(label, OP_CODE);
         this.result = Registers.Register.valueOf(result);
     }
-
+    /**
+     * Executes the return instruction, prints the value of the register to the console and returns a program counter update.
+     *
+     * @param m Machine file that contains an Instruction of that type.
+     */
     @Override
     public int execute(Machine m) {
         System.out.println("The current value stored in register " + result.name() + " is " + m.getRegisters().get(result));

@@ -43,7 +43,11 @@ public class AddInstruction extends Instruction {
 		this.result = Registers.Register.valueOf(result);
 		this.source = Registers.Register.valueOf(source);
 	}
-
+	/**
+	 * Executes the arithmetic instruction, sets the registers to new values and returns a program counter update.
+	 *
+	 * @param m Machine file that contains an Instruction of that type.
+	 */
 	@Override
 	public int execute(Machine m) {
 		int value1 = m.getRegisters().get(result);

@@ -15,6 +15,14 @@ public class SubInstruction extends Instruction {
     public static final String OP_CODE = "sub";
 
 
+    /**
+     * Constructor: a String with a label (can be null), as well as two registers on which values the arithmetic instruction is performed
+     *
+     * @param label optional label (can be null)
+     * @param result first register. Value of source will be subtracted from value of result and the result will be stored in this register
+     * @param source second register. Value will be subtracted from value of result. Register keeps original value after the operation.
+     */
+
     public SubInstruction(String label, RegisterName result, RegisterName source) {
         super(label, OP_CODE);
         this.result = result;
@@ -26,6 +34,12 @@ public class SubInstruction extends Instruction {
         this.result = Registers.Register.valueOf(result);
         this.source = Registers.Register.valueOf(source);
     }
+
+    /**
+     * Executes the arithmetic instruction, sets the registers to new values and returns a program counter update.
+     *
+     * @param m Machine file that contains an Instruction of that type.
+     */
     @Override
     public int execute(Machine m) {
         int value1 = m.getRegisters().get(result);
