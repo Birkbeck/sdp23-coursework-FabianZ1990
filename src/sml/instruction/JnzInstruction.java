@@ -8,11 +8,14 @@ import sml.Registers;
 
 import java.util.Objects;
 
-// TODO: write a JavaDoc for the class
 
 /**
- * @author
+ * Takes  a register, as well as a label. In case the input register does not hold the value "0", the program jumps to the line
+ * marked by the label of the second input. In case the register contains 0, the program continues normally with the next line.
+ * Can take an optional label, in case the instruction line is marked by one (value label can be null).
+ * @author Fabian Zischler
  */
+
 
 public class JnzInstruction extends Instruction {
     private final RegisterName result;

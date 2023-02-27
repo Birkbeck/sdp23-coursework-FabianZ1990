@@ -7,11 +7,13 @@ import sml.Registers;
 
 import java.util.Objects;
 
-// TODO: write a JavaDoc for the class
 
 /**
- * @author
+ * Takes a register and prints it's value out to the console. Value of register is not changed.
+ * Can take an optional label, in case the instruction line is marked by one (value label can be null).
+ * @author Fabian Zischler
  */
+
 
 public class OutInstruction extends Instruction {
     private final RegisterName result;

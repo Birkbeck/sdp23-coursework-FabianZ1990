@@ -7,6 +7,12 @@ import sml.Registers;
 
 import java.util.Objects;
 
+/**
+ * Takes 2 registers and subtracts the value of the second from the value of the first one. Stores the result in the first of the two registers (order is determined by the SML file).
+ * Can take an optional label, in case the instruction line is marked by one (value label can be null).
+ * @author Fabian Zischler
+ */
+
 public class SubInstruction extends Instruction {
 
     private final RegisterName result;

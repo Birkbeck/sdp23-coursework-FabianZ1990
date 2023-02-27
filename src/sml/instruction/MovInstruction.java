@@ -7,11 +7,12 @@ import sml.Registers;
 
 import java.util.Objects;
 
-// TODO: write a JavaDoc for the class
-
 /**
- * @author
+ * Takes a register, as well as an integer. The integer is stored in the register. The previously hold value is overwritten.
+ * Can take an optional label, in case the instruction line is marked by one (value label can be null).
+ * @author Fabian Zischler
  */
+
 
 public class MovInstruction extends Instruction {
     private final RegisterName result;

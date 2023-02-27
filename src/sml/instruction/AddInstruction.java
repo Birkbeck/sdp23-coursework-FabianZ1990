@@ -7,11 +7,9 @@ import sml.Registers;
 
 import java.util.Objects;
 
-// TODO: write a JavaDoc for the class
-
 /**
- * Takes values of 2 registers and adds them together. Stores the result in the first of the two registers (order is determined by the SML file)
- *
+ * Takes 2 registers and adds their values together. Stores the result in the first of the two registers (order is determined by the SML file)
+ * Can take an optional label, in case the instruction line is marked by one (value label can be null).
  *
  * @author Fabian Zischler
  */

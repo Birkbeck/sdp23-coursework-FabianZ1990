@@ -7,11 +7,13 @@ import sml.Registers;
 
 import java.util.Objects;
 
-// TODO: write a JavaDoc for the class
 
 /**
- * @author
+ * Takes 2 registers and multiplies the value of the first by the value of the second one. Stores the result in the first of the two registers (order is determined by the SML file)
+ * Can take an optional label, in case the instruction line is marked by one (value label can be null).
+ * @author Fabian Zischler
  */
+
 
 public class MulInstruction extends Instruction {
     private final RegisterName result;
