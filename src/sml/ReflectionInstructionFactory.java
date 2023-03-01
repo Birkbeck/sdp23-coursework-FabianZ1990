@@ -86,7 +86,7 @@ public class ReflectionInstructionFactory {
             } else if ((constructorParameters[x].getName().equals("java.lang.String"))) {
                 passOnParameters.add(args.get(x));
             } else {
-                throw new IllegalArgumentException("Wrong parameter provided for Instruction "+  opcode);
+                throw new IllegalArgumentException("Wrong parameter provided for Instruction "+  opcode + " - " + constructorParameters[x].getName() + " required");
             }
 
         }
