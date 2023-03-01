@@ -1,12 +1,8 @@
 package sml;
 
 import sml.Exceptions.OpcodeNotFoundException;
-import sml.instruction.*;
-
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -82,9 +78,6 @@ public final class Translator {
         input.add(r);
         input.add(s);
 
-
-        //var factory = new ClassPathXmlApplicationContext("/beans.xml");
-        //return (Instruction) factory.getBean(opcode, input.toArray());
 
 
         ReflectionInstructionFactory getInstruction = ReflectionInstructionFactory.getInstance();
