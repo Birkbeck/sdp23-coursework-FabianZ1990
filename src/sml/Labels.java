@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 import static sml.Instruction.NORMAL_PROGRAM_COUNTER_UPDATE;
 
-// TODO: write a JavaDoc for the class
 
 /**
  *Organises the labels for the different instructions (especially important for Instructions that require a jump, like the JnzInstruction)

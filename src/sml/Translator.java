@@ -13,15 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+//import org.springframework.beans.factory.BeanFactory;
+//import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * This class ....
- * <p>
+
  * The translator of a <b>S</b><b>M<b>L</b> program.
+ * Scans the provided document line by line for an SML program and separates labels and the program itself.
+ * Calls the different instructions depending on the opcode of an instruction line in the provided file.
  *
- * @author ...
+ * @author Fabian Zischler
  */
 public final class Translator {
 
@@ -83,6 +84,8 @@ public final class Translator {
 
 
         //var factory = new ClassPathXmlApplicationContext("/beans.xml");
+        //return (Instruction) factory.getBean(opcode, input.toArray());
+
 
         ReflectionInstructionFactory getInstruction = ReflectionInstructionFactory.getInstance();
 
@@ -91,8 +94,6 @@ public final class Translator {
        } catch (InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException | OpcodeNotFoundException e) {
            throw new RuntimeException(e);
        }
-        //return (Instruction) factory.getBean(opcode, input.toArray());
-
     }
 
 
