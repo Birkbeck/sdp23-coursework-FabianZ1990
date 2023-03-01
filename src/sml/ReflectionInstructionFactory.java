@@ -1,14 +1,13 @@
 package sml;
 
 import sml.Exceptions.OpcodeNotFoundException;
-import sml.instruction.*;
+
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Map;
 
-import static java.lang.System.exit;
+
 
 
 /**
@@ -27,8 +26,7 @@ public class ReflectionInstructionFactory {
 
 
     /**
-     * Constructor:
-     *
+     * Constructor:*
      * no input variables, private because of Singleton use
      *
      */
@@ -78,15 +76,17 @@ public class ReflectionInstructionFactory {
 
         passOnParameters.add(args.get(0));                                                                              //label has to be added as a string even if it is numeric
 
-        Class[] constructorParameters = cons[0].getParameterTypes();
+        Class<?>[] constructorParameters = cons[0].getParameterTypes();
 
         for (int x = 1; x < constructorParameters.length; x++) {
             if (constructorParameters[x].getName().equals("sml.RegisterName")) {
                 passOnParameters.add(Registers.Register.valueOf(args.get(x)));
             } else if ((constructorParameters[x].getName().equals("int") && NumericCheck.isNumeric(args.get(x)))) {
                 passOnParameters.add(Integer.parseInt(args.get(x)));
-            } else {
+            } else if ((constructorParameters[x].getName().equals("java.lang.String"))) {
                 passOnParameters.add(args.get(x));
+            } else {
+                throw new IllegalArgumentException("Wrong parameter provided for Instruction "+  opcode);
             }
 
         }
