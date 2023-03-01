@@ -8,8 +8,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 
-
-
 /**
  * creates an SML instruction from a provided opcode, as well as a list of arguments from the input file
  * Uses string creation and Reflection API to get the right instruction (needs uniform naming of subclasses of "Instruction" in the class hierarchy)
