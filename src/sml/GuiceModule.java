@@ -3,6 +3,7 @@ package sml;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.*;
+import sml.Translator;
 
 /**
  * serves as the mandatory configuration class for Google Guice Assisted Inject.

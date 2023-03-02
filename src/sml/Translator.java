@@ -22,7 +22,6 @@ import java.util.Scanner;
  * @author Fabian Zischler
  */
 public final class Translator {
-
     private final String fileName; // source file of SML code
 
     // line contains the characters in the current line that's not been processed yet
