@@ -1,6 +1,8 @@
 package sml;
 
+import com.google.inject.Guice;
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 import sml.Exceptions.OpcodeNotFoundException;
 import java.io.File;
 import java.io.IOException;
@@ -20,9 +22,6 @@ import java.util.Scanner;
  * @author Fabian Zischler
  */
 public final class Translator {
-
-    @Inject
-    guiceInterface factoryInject;
 
     private final String fileName; // source file of SML code
 
@@ -80,16 +79,29 @@ public final class Translator {
         input.add(r);
         input.add(s);
 
+        Injector inj = Guice.createInjector(new GuiceModule());
 
+        guiceInterface facCreator = inj.getInstance(guiceInterface.class);
 
-        ReflectionInstructionFactory getInstruction = ReflectionInstructionFactory.getInstance();
+        ReflectionInstructionFactory fac = facCreator.buildFactory();
 
-       try {
-           return getInstruction.createInstruction(opcode, input);
-       } catch (InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException | OpcodeNotFoundException e) {
-           throw new RuntimeException(e);
-       }
+        try {
+
+            return fac.createInstruction(opcode,input);
+
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        } catch (OpcodeNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
+
 
 
 //           // TODO: add code for all other types of instructions
