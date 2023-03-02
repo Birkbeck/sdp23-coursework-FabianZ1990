@@ -4,6 +4,14 @@ import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.*;
 
+/**
+ * serves as the mandatory configuration class for Google Guice Assisted Inject.
+ *
+ *
+ * @author Fabian Zischler
+ */
+
+
 public class GuiceModule extends AbstractModule{
 
 
