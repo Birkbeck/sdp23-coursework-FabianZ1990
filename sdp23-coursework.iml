@@ -25,9 +25,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="springframework.spring.core" level="project" />
-    <orderEntry type="library" name="springframework.spring.beans" level="project" />
-    <orderEntry type="library" name="springframework.spring.context" level="project" />
     <orderEntry type="module-library" scope="TEST">
       <library name="JUnit5.7.0">
         <CLASSES>
@@ -60,5 +57,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="google.inject.extensions.guice.assistedinject" level="project" />
+    <orderEntry type="library" name="google.inject.guice" level="project" />
   </component>
 </module>
