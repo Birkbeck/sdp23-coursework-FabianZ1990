@@ -2,18 +2,12 @@ package sml;
 
 import sml.Exceptions.OpcodeNotFoundException;
 import sml.instruction.*;
-
-
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-//import org.springframework.beans.factory.BeanFactory;
-//import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
 
@@ -76,7 +70,7 @@ public final class Translator {
             case MovInstruction.OP_CODE -> {
                 String r = scan();
                 String s = scan();
-                return new MovInstruction(label, Registers.Register.valueOf(r), Integer.valueOf(s));
+                return new MovInstruction(label, Registers.Register.valueOf(r), Integer.parseInt(s));
             }
             case OutInstruction.OP_CODE -> {
                 String r = scan();
@@ -115,9 +109,7 @@ public final class Translator {
             // TODO: Next, use dependency injection to allow this machine class
             //       to work with different sets of opcodes (different CPUs)
 
-            default -> {
-                throw new OpcodeNotFoundException(opcode + " is not a valid opcode");
-            }
+            default -> throw new OpcodeNotFoundException(opcode + " is not a valid opcode");
         }
     }
 

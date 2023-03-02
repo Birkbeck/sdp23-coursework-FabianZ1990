@@ -1,8 +1,7 @@
 package sml;
 
-// TODO: write a JavaDoc for the class
 
-import java.io.IOException;
+
 
 /**
  * Represents an abstract instruction. Serves as a superclass for all different SML instructions. Provides variables
