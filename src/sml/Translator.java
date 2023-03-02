@@ -1,5 +1,6 @@
 package sml;
 
+import com.google.inject.Inject;
 import sml.Exceptions.OpcodeNotFoundException;
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +20,9 @@ import java.util.Scanner;
  * @author Fabian Zischler
  */
 public final class Translator {
+
+    @Inject
+    guiceInterface factoryInject;
 
     private final String fileName; // source file of SML code
 
