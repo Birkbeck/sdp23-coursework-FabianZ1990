@@ -1,12 +1,5 @@
 package sml;
-
-import sml.instruction.AddInstruction;
-
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 
 public class Main {
