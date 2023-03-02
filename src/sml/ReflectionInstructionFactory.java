@@ -1,5 +1,7 @@
 package sml;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import sml.Exceptions.OpcodeNotFoundException;
 
 import java.lang.reflect.Constructor;
@@ -27,14 +29,14 @@ public class ReflectionInstructionFactory {
      * no input variables, private because of Singleton use
      *
      */
+    @Inject
     private ReflectionInstructionFactory() {
-
     }
-
 
     /**
      * Checks for an instance of the factory (if not there, initialize one)
      */
+    @Singleton
     public static ReflectionInstructionFactory getInstance() {
         if (factory == null)
 
