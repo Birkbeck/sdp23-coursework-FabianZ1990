@@ -1,6 +1,6 @@
 package sml;
-
 import java.io.IOException;
+
 
 public class Main {
 	/**
@@ -8,7 +8,7 @@ public class Main {
 	 *
 	 * @param args name of the file containing the program text.
 	 */
-	public static void main(String... args) {
+	public static void main(String... args)  {
 		if (args.length != 1) {
 			System.err.println("Incorrect number of arguments - Machine <file> - required");
 			System.exit(-1);
@@ -24,7 +24,9 @@ public class Main {
 
 			System.out.println("Beginning program execution.");
 			m.execute();
+
 			System.out.println("Ending program execution.");
+
 
 			System.out.println("Values of registers at program termination:" + m.getRegisters() + ".");
 		}

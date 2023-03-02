@@ -1,21 +1,22 @@
 package sml;
 
-import sml.instruction.*;
-
+import sml.Exceptions.OpcodeNotFoundException;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static sml.Registers.Register;
 
 /**
- * This class ....
- * <p>
- * The translator of a <b>S</b><b>M</b>al<b>L</b> program.
+
+ * The translator of a <b>S</b><b>M<b>L</b> program.
+ * Scans the provided document line by line for an SML program and separates labels and the program itself.
+ * Calls the different instructions depending on the opcode of an instruction line in the provided file.
  *
- * @author ...
+ * @author Fabian Zischler
  */
 public final class Translator {
 
@@ -66,26 +67,35 @@ public final class Translator {
             return null;
 
         String opcode = scan();
-        switch (opcode) {
-            case AddInstruction.OP_CODE -> {
-                String r = scan();
-                String s = scan();
-                return new AddInstruction(label, Register.valueOf(r), Register.valueOf(s));
-            }
+        String r = scan();
+        String s = scan();
 
-            // TODO: add code for all other types of instructions
+        ArrayList<String> input = new ArrayList<>();
 
-            // TODO: Then, replace the switch by using the Reflection API
+        input.add(label);
+        input.add(r);
+        input.add(s);
 
-            // TODO: Next, use dependency injection to allow this machine class
-            //       to work with different sets of opcodes (different CPUs)
 
-            default -> {
-                System.out.println("Unknown instruction: " + opcode);
-            }
-        }
-        return null;
+
+        ReflectionInstructionFactory getInstruction = ReflectionInstructionFactory.getInstance();
+
+       try {
+           return getInstruction.createInstruction(opcode, input);
+       } catch (InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException | OpcodeNotFoundException e) {
+           throw new RuntimeException(e);
+       }
     }
+
+
+//           // TODO: add code for all other types of instructions
+//
+//           // TODO: Then, replace the switch by using the Reflection API
+//
+//           // TODO: Next, use dependency injection to allow this machine class
+//               to work with different sets of opcodes (different CPUs)
+
+
 
 
     private String getLabel() {
