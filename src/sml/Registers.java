@@ -3,7 +3,6 @@ package sml;
 import java.util.*;
 import java.util.stream.Collectors;
 
-// TODO: write a JavaDoc for the class
 
 /**
  *This class creates a certain number of different registers (at the moment 8 different ones)
@@ -17,7 +16,7 @@ public final class Registers {
     private final Map<Register, Integer> registers = new HashMap<>();
 
     public enum Register implements RegisterName {
-        EAX, EBX, ECX, EDX, ESP, EBP, ESI, EDI;
+        EAX, EBX, ECX, EDX, ESP, EBP, ESI, EDI
     }
 
     public Registers() {

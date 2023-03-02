@@ -2,14 +2,12 @@ package sml;
 
 import sml.Exceptions.DuplicateLabelException;
 import sml.Exceptions.LabelNotFoundException;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static sml.Instruction.NORMAL_PROGRAM_COUNTER_UPDATE;
 
 
 /**
