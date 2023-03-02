@@ -35,12 +35,6 @@ public class DivInstruction extends Instruction {
         this.source = source;
     }
 
-    public DivInstruction(String label, String result, String source) {
-        super(label, OP_CODE);
-        this.result = Registers.Register.valueOf(result);
-        this.source = Registers.Register.valueOf(source);
-    }
-
     /**
      * Executes the arithmetic instruction, sets the registers to new values and returns a program counter update.
      * In case of division operation, also throws exceptions when division through zero is tried.

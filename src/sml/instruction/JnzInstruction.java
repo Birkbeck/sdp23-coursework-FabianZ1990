@@ -17,7 +17,7 @@ import java.util.Objects;
  */
 
 
-public class JnzInstruction extends Instruction {
+public class JnzInstruction extends Instruction{
     private final RegisterName result;
     private final String nextLabel;
 
@@ -35,12 +35,6 @@ public class JnzInstruction extends Instruction {
     public JnzInstruction(String label, RegisterName result, String labelToJump) {
         super(label, OP_CODE);
         this.result = result;
-        this.nextLabel = labelToJump;
-    }
-
-    public JnzInstruction(String label, String result, String labelToJump) {
-        super(label, OP_CODE);
-        this.result = Registers.Register.valueOf(result);
         this.nextLabel = labelToJump;
     }
 

@@ -13,7 +13,7 @@ import java.util.Objects;
  * @author Fabian Zischler
  */
 
-public class SubInstruction extends Instruction {
+public class SubInstruction extends Instruction{
 
     private final RegisterName result;
     private final RegisterName source;
@@ -33,12 +33,6 @@ public class SubInstruction extends Instruction {
         super(label, OP_CODE);
         this.result = result;
         this.source = source;
-    }
-
-    public SubInstruction(String label, String result, String source) {
-        super(label, OP_CODE);
-        this.result = Registers.Register.valueOf(result);
-        this.source = Registers.Register.valueOf(source);
     }
 
     /**

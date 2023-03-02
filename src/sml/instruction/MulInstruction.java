@@ -15,7 +15,7 @@ import java.util.Objects;
  */
 
 
-public class MulInstruction extends Instruction {
+public class MulInstruction extends Instruction{
     private final RegisterName result;
     private final RegisterName source;
 
@@ -35,11 +35,6 @@ public class MulInstruction extends Instruction {
         this.source = source;
     }
 
-    public MulInstruction(String label, String result, String source) {
-        super(label, OP_CODE);
-        this.result = Registers.Register.valueOf(result);
-        this.source = Registers.Register.valueOf(source);
-    }
     /**
      * Executes the arithmetic instruction, sets the registers to new values and returns a program counter update.
      *

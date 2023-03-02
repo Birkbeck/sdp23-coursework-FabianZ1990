@@ -1,5 +1,6 @@
 package sml.instruction;
 
+
 import sml.Instruction;
 import sml.Machine;
 import sml.RegisterName;
@@ -35,12 +36,6 @@ public class AddInstruction extends Instruction {
 		this.source = source;
 	}
 
-
-	public AddInstruction(String label, String result, String source) {
-		super(label, OP_CODE);
-		this.result = Registers.Register.valueOf(result);
-		this.source = Registers.Register.valueOf(source);
-	}
 	/**
 	 * Executes the arithmetic instruction, sets the registers to new values and returns a program counter update.
 	 *

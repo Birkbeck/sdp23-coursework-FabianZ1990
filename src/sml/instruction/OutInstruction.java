@@ -15,7 +15,7 @@ import java.util.Objects;
  */
 
 
-public class OutInstruction extends Instruction {
+public class OutInstruction extends Instruction{
     private final RegisterName result;
 
 
@@ -33,10 +33,6 @@ public class OutInstruction extends Instruction {
         this.result = result;
     }
 
-    public OutInstruction(String label, String result, String source) {
-        super(label, OP_CODE);
-        this.result = Registers.Register.valueOf(result);
-    }
     /**
      * Executes the return instruction, prints the value of the register to the console and returns a program counter update.
      *

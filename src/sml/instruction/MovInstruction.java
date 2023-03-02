@@ -14,7 +14,7 @@ import java.util.Objects;
  */
 
 
-public class MovInstruction extends Instruction {
+public class MovInstruction extends Instruction{
     private final RegisterName result;
     private final int source;
 
@@ -35,11 +35,6 @@ public class MovInstruction extends Instruction {
         this.source = source;
     }
 
-    public MovInstruction(String label, String result, String source) {
-        super(label, OP_CODE);
-        this.result = Registers.Register.valueOf(result);
-        this.source = Integer.valueOf(source);
-    }
 
     /**
      * Executes the loading instruction, sets the registers to new values and returns a program counter update.
