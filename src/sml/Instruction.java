@@ -1,7 +1,5 @@
 package sml;
 
-// TODO: write a JavaDoc for the class
-
 import java.io.IOException;
 
 /**
