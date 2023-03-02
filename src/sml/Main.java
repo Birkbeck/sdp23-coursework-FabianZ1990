@@ -1,5 +1,6 @@
 package sml;
 
+import sml.Exceptions.OpcodeNotFoundException;
 import sml.instruction.AddInstruction;
 
 import java.io.IOException;
@@ -15,7 +16,7 @@ public class Main {
 	 *
 	 * @param args name of the file containing the program text.
 	 */
-	public static void main(String... args)  {
+	public static void main(String... args) throws OpcodeNotFoundException {
 		if (args.length != 1) {
 			System.err.println("Incorrect number of arguments - Machine <file> - required");
 			System.exit(-1);

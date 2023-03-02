@@ -1,6 +1,9 @@
 package sml;
 
 import sml.Exceptions.OpcodeNotFoundException;
+import sml.instruction.*;
+
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -35,7 +38,7 @@ public final class Translator {
     // prog (the program)
     // return "no errors were detected"
 
-    public void readAndTranslate(Labels labels, List<Instruction> program) throws IOException {
+    public void readAndTranslate(Labels labels, List<Instruction> program) throws IOException, OpcodeNotFoundException {
         try (var sc = new Scanner(new File(fileName), StandardCharsets.UTF_8)) {
             labels.reset();
             program.clear();
@@ -64,40 +67,59 @@ public final class Translator {
      * The input line should consist of a single SML instruction,
      * with its label already removed.
      */
-    private Instruction getInstruction(String label) {
+    private Instruction getInstruction(String label) throws OpcodeNotFoundException {
         if (line.isEmpty())
             return null;
 
         String opcode = scan();
-        String r = scan();
-        String s = scan();
+        switch (opcode) {
+            case MovInstruction.OP_CODE -> {
+                String r = scan();
+                String s = scan();
+                return new MovInstruction(label, Registers.Register.valueOf(r), Integer.valueOf(s));
+            }
+            case OutInstruction.OP_CODE -> {
+                String r = scan();
+                String s = scan();
+                return new OutInstruction(label, Registers.Register.valueOf(r));
+            }
+            case JnzInstruction.OP_CODE -> {
+                String r = scan();
+                String s = scan();
+                return new JnzInstruction(label, Registers.Register.valueOf(r), s);
+            }
+            case AddInstruction.OP_CODE -> {
+                String r = scan();
+                String s = scan();
+                return new AddInstruction(label, Registers.Register.valueOf(r), Registers.Register.valueOf(s));
+            }
+            case SubInstruction.OP_CODE -> {
+                String r = scan();
+                String s = scan();
+                return new SubInstruction(label, Registers.Register.valueOf(r), Registers.Register.valueOf(s));
+            }
+            case MulInstruction.OP_CODE -> {
+                String r = scan();
+                String s = scan();
+                return new MulInstruction(label, Registers.Register.valueOf(r), Registers.Register.valueOf(s));
+            }
+            case DivInstruction.OP_CODE -> {
+                String r = scan();
+                String s = scan();
+                return new DivInstruction(label, Registers.Register.valueOf(r), Registers.Register.valueOf(s));
+            }
+            // TODO: add code for all other types of instructions
 
-        ArrayList<String> input = new ArrayList<>();
+            // TODO: Then, replace the switch by using the Reflection API
 
-        input.add(label);
-        input.add(r);
-        input.add(s);
+            // TODO: Next, use dependency injection to allow this machine class
+            //       to work with different sets of opcodes (different CPUs)
 
-
-
-        ReflectionInstructionFactory getInstruction = ReflectionInstructionFactory.getInstance();
-
-       try {
-           return getInstruction.createInstruction(opcode, input);
-       } catch (InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException | OpcodeNotFoundException e) {
-           throw new RuntimeException(e);
-       }
+            default -> {
+                throw new OpcodeNotFoundException(opcode + " is not a valid opcode");
+            }
+        }
     }
-
-
-//           // TODO: add code for all other types of instructions
-//
-//           // TODO: Then, replace the switch by using the Reflection API
-//
-//           // TODO: Next, use dependency injection to allow this machine class
-//               to work with different sets of opcodes (different CPUs)
-
-
 
 
     private String getLabel() {
