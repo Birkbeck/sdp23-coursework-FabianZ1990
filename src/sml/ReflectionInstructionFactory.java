@@ -27,9 +27,7 @@ public class ReflectionInstructionFactory {
      *
      */
     private ReflectionInstructionFactory() {
-
     }
-
 
     /**
      * Checks for an instance of the factory (if not there, initialize one)
