@@ -8,7 +8,7 @@ import sml.Instruction;
 import sml.Machine;
 import sml.ReflectionInstructionFactory;
 import sml.Registers;
-import sml.instruction.AddInstruction;
+
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -40,18 +40,11 @@ class ReflectionInstructionFactoryTest {
         String testOpcode = "add";
         ArrayList<String> testInput = new ArrayList<>(Arrays.asList(null, "EAX", "EBX"));
         ReflectionInstructionFactory testFac = ReflectionInstructionFactory.getInstance();
-        Instruction instruction = null;
+        Instruction instruction;
         try {
             instruction = testFac.createInstruction(testOpcode, testInput);
-        } catch (InvocationTargetException e) {
-            throw new RuntimeException(e);
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        } catch (OpcodeNotFoundException e) {
+        } catch (InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException |
+                 OpcodeNotFoundException e) {
             throw new RuntimeException(e);
         }
         instruction.execute(machine);
@@ -66,22 +59,32 @@ class ReflectionInstructionFactoryTest {
         String testOpcode = "mul";
         ArrayList<String> testInput = new ArrayList<>(Arrays.asList("f2", "EAX", "EBX"));
         ReflectionInstructionFactory testFac = ReflectionInstructionFactory.getInstance();
-        Instruction instruction = null;
+        Instruction instruction;
         try {
             instruction = testFac.createInstruction(testOpcode, testInput);
-        } catch (InvocationTargetException e) {
-            throw new RuntimeException(e);
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        } catch (OpcodeNotFoundException e) {
+        } catch (InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException |
+                 OpcodeNotFoundException e) {
             throw new RuntimeException(e);
         }
         instruction.execute(machine);
         Assertions.assertEquals(30, machine.getRegisters().get(EAX));
+    }
+    @Test
+    void executeValid3() {
+        registers.set(EAX, 5);
+        registers.set(EBX, 6);
+        String testOpcode = "mov";
+        ArrayList<String> testInput = new ArrayList<>(Arrays.asList("f2", "EAX", "1"));
+        ReflectionInstructionFactory testFac = ReflectionInstructionFactory.getInstance();
+        Instruction instruction;
+        try {
+            instruction = testFac.createInstruction(testOpcode, testInput);
+        } catch (InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException |
+                 OpcodeNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        instruction.execute(machine);
+        Assertions.assertEquals(1, machine.getRegisters().get(EAX));
     }
 
 }
