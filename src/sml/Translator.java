@@ -123,7 +123,6 @@ public final class Translator {
         line = word + " " + line;
         return null;
     }
-
     /*
      * Return the first word of line and remove it from line.
      * If there is no word, return "".
