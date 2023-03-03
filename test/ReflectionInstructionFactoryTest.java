@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import sml.Instruction;
 import sml.Machine;
+import sml.ReflectionInstructionFactory;
 import sml.Registers;
 import sml.instruction.AddInstruction;
 
@@ -31,6 +32,8 @@ class ReflectionInstructionFactoryTest {
     void executeValid() {
         registers.set(EAX, 5);
         registers.set(EBX, 6);
+        Array
+        ReflectionInstructionFactory testFac = ReflectionInstructionFactory.getInstance();
         Instruction instruction = new AddInstruction(null, EAX, EBX);
         instruction.execute(machine);
         Assertions.assertEquals(11, machine.getRegisters().get(EAX));
