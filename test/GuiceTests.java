@@ -69,4 +69,23 @@ class GuiceTests {
         instruction.execute(machine);
         Assertions.assertEquals(30, machine.getRegisters().get(EAX));
     }
+    @Test
+    void executeValid3() {
+        registers.set(EAX, 5);
+        registers.set(EBX, 6);
+        String testOpcode = "mov";
+        ArrayList<String> testInput = new ArrayList<>(Arrays.asList("f2", "EAX", "1"));
+        Injector testInjector = Guice.createInjector(new GuiceModule());
+        guiceInterface testGuiceFac = testInjector.getInstance(guiceInterface.class);
+        Instruction instruction;
+        try {
+            instruction = testGuiceFac.buildFactory().createInstruction(testOpcode, testInput);
+        } catch (InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException |
+                 OpcodeNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        instruction.execute(machine);
+        Assertions.assertEquals(1, machine.getRegisters().get(EAX));
+    }
+
 }
