@@ -143,6 +143,4 @@ class ReflectionInstructionFactoryTest {
         Assertions.assertEquals("Wrong parameter provided for Instruction mov - int required", possibleException.getMessage());
     }
 
-
-
 }
