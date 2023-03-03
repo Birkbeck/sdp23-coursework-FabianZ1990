@@ -125,4 +125,24 @@ class GuiceTests {
             instruction.execute(machine);});
         Assertions.assertEquals("Unknown instruction: wrongOpcode - The program will be terminated.", possibleException.getMessage());
     }
+    @Test
+    void tryInvalidParameters() {
+        Exception possibleException = Assertions.assertThrows(IllegalArgumentException.class, () ->
+        {  registers.set(EAX, 5);
+            registers.set(EBX, 6);
+            String testOpcode = "mov";
+            ArrayList<String> testInput = new ArrayList<>(Arrays.asList("f2", "EAX", "EBX"));
+            Injector testInjector = Guice.createInjector(new GuiceModule());
+            guiceInterface testGuiceFac = testInjector.getInstance(guiceInterface.class);
+            Instruction instruction;
+            try {
+                instruction = testGuiceFac.buildFactory().createInstruction(testOpcode, testInput);
+            } catch (InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException |
+                     OpcodeNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            instruction.execute(machine);});
+        Assertions.assertEquals("Wrong parameter provided for Instruction mov - int required", possibleException.getMessage());
+    }
+
 }
