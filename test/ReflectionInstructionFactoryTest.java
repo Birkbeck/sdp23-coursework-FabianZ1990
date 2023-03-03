@@ -105,4 +105,24 @@ class ReflectionInstructionFactoryTest {
                 "The current value stored in register " + EAX.name() + " is " + machine.getRegisters().get(EAX));
     }
 
+    @Test
+    void tryInvalidOpcode() {
+        Exception possibleException = Assertions.assertThrows(OpcodeNotFoundException.class, () ->
+        {  registers.set(EAX, 5);
+            registers.set(EBX, 6);
+            String testOpcode = "wrongOpcode";
+            ArrayList<String> testInput = new ArrayList<>(Arrays.asList("f2", "EAX", "1"));
+            ReflectionInstructionFactory testFac = ReflectionInstructionFactory.getInstance();
+            Instruction instruction;
+            try {
+                instruction = testFac.createInstruction(testOpcode, testInput);
+            } catch (InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException |
+                     OpcodeNotFoundException e) {
+                throw new OpcodeNotFoundException("Unknown instruction: " + testOpcode + " - The program will be terminated.");
+            }
+            instruction.execute(machine);});
+        Assertions.assertEquals("Unknown instruction: wrongOpcode - The program will be terminated.", possibleException.getMessage());
+    }
+
+
 }
