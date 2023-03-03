@@ -87,5 +87,42 @@ class GuiceTests {
         instruction.execute(machine);
         Assertions.assertEquals(1, machine.getRegisters().get(EAX));
     }
-
+    @Test
+    void executeValid4() {
+        registers.set(EAX, 5);
+        registers.set(EBX, 6);
+        String testOpcode = "out";
+        ArrayList<String> testInput = new ArrayList<>(Arrays.asList("f2", "EAX", "1"));
+        Injector testInjector = Guice.createInjector(new GuiceModule());
+        guiceInterface testGuiceFac = testInjector.getInstance(guiceInterface.class);
+        Instruction instruction;
+        try {
+            instruction = testGuiceFac.buildFactory().createInstruction(testOpcode, testInput);
+        } catch (InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException |
+                 OpcodeNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        instruction.execute(machine);
+        Assertions.assertEquals("The current value stored in register EAX is 5",
+                "The current value stored in register " + EAX.name() + " is " + machine.getRegisters().get(EAX));
+    }
+    @Test
+    void tryInvalidOpcode() {
+        Exception possibleException = Assertions.assertThrows(OpcodeNotFoundException.class, () ->
+        {  registers.set(EAX, 5);
+            registers.set(EBX, 6);
+            String testOpcode = "wrongOpcode";
+            ArrayList<String> testInput = new ArrayList<>(Arrays.asList("f2", "EAX", "1"));
+            Injector testInjector = Guice.createInjector(new GuiceModule());
+            guiceInterface testGuiceFac = testInjector.getInstance(guiceInterface.class);
+            Instruction instruction;
+            try {
+                instruction = testGuiceFac.buildFactory().createInstruction(testOpcode, testInput);
+            } catch (InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException |
+                     OpcodeNotFoundException e) {
+                throw new OpcodeNotFoundException("Unknown instruction: " + testOpcode + " - The program will be terminated.");
+            }
+            instruction.execute(machine);});
+        Assertions.assertEquals("Unknown instruction: wrongOpcode - The program will be terminated.", possibleException.getMessage());
+    }
 }
